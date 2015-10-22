@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     connect = require('gulp-connect');
 
 var serverConfig = {
-        root: 'step-01',
+        root: 'step-02',
         port: 3000
     }; 
 

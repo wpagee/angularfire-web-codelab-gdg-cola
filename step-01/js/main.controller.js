@@ -4,11 +4,12 @@
 
     angular
         .module('HangmanApp')
-        .controller('MainController', MainController);
+        .controller('MainController', ['$firebaseObject', MainController]);
 
-    function MainController() {
-        var vm = this;
+    function MainController($firebaseObject) {
+        var vm = this,
+        	ref = new Firebase("https://gdg-cola-web-codelab.firebaseio.com/");
 
-        console.log('Hello World');
+        console.dir(ref);
     }    
 })();

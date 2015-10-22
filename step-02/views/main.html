@@ -1,0 +1,40 @@
+<md-toolbar layout="row">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+      <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
+    </md-button>
+    <h1 class="md-headline">Hangman on Fire</h1>
+  </div>
+</md-toolbar>
+<div layout="row" flex>
+    <div layout="column" flex="45" offset="30" id="content">
+        <md-content layout="column" flex class="md-padding">
+
+            <form ng-submit="MainController.addMessage($event)">
+                <md-input-container>
+                  <label>Name</label>
+                  <input ng-model="MainController.name" type="text" />
+                </md-input-container>
+                <md-input-container>
+                  <label>Message</label>
+                  <input ng-model="MainController.message" type="text" />
+                </md-input-container>
+                <md-button type="submit" class="md-raised" style="display: none;">Submit</md-button>
+            </form>
+
+            <md-content id="chat-window" style="height: 400px; margin-top: 25px; overflow-y: scroll;">
+                <section>
+                    <md-list>
+                      <md-subheader class="md-accent">Chat Messages</md-subheader>
+                      <md-list-item class="md-3-line" ng-repeat="msg in MainController.messages">
+                        <div class="md-list-item-text" layout="column">
+                          <h3>{{ msg.name }}</h3>
+                          <p>{{ msg.message }}</p>
+                        </div>
+                      </md-list-item>
+                    </md-list>  
+                </section>
+            </md-content>
+        </md-content>
+    </div>
+</div>

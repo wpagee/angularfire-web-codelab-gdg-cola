@@ -10,6 +10,11 @@
     background-color: #a4c639;
 }
 
+md-card md-card-content {
+    padding: 0;
+    padding-left: 10px;
+}
+
 md-card-footer {
     border-top: 1px solid #EEEEEE;
 }

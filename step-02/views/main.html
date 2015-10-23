@@ -1,4 +1,4 @@
-<md-toolbar layout="row">
+<md-toolbar class="md-whiteframe-z2" layout="row">
   <div class="md-toolbar-tools">
     <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
       <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
@@ -7,34 +7,59 @@
   </div>
 </md-toolbar>
 <div layout="row" flex>
-    <div layout="column" flex="45" offset="30" id="content">
-        <md-content layout="column" flex class="md-padding">
+    <div layout="column" flex="45" offset="30" layout-padding layout-margin id="content">
+        <md-content layout="column" flex layout-padding>
 
-            <form ng-submit="MainController.addMessage($event)">
+            <form name="addMsgForm" ng-submit="MainController.addMessage($event)">
                 <md-input-container>
-                  <label>Name</label>
-                  <input ng-model="MainController.name" type="text" />
+                    <label>Display Name</label>
+                    <input ng-model="MainController.name" name="name" type="text" ng-required="true" />
                 </md-input-container>
-                <md-input-container>
-                  <label>Message</label>
-                  <input ng-model="MainController.message" type="text" />
-                </md-input-container>
+
+                <md-card>
+                    <md-toolbar class="md-accent">
+                        <div class="md-toolbar-tools">
+                            <span style="color: #ffffff;">Chat Messages</span>
+                        </div>
+                    </md-toolbar>
+                    <md-card-content>    
+                        <md-content id="chat-window" style="height: 400px; overflow-y: scroll;">
+                            <section>
+                                <md-list>
+                                  <md-list-item class="md-3-line" ng-repeat="msg in MainController.messages">
+                                    <div class="md-avatar" ng-if="msg.name !== 'FIREBOT'"> <i class="material-icons"> face </i></div>
+                                    <div class="md-avatar" ng-if="msg.name === 'FIREBOT'"> <i class="material-icons fire-bot"> adb </i></div>
+                                    <div class="md-list-item-text" layout="column">
+                                      <h3>{{ msg.name }}</h3>
+                                      <p>{{msg.message}}</p>
+                                    </div>
+                                  </md-list-item>
+                                </md-list>  
+                            </section>
+                        </md-content>
+
+                    </md-card-content>
+                    <md-card-footer>
+                        <md-input-container>
+                            <label>Enter your message</label>
+                            <input ng-model="MainController.message" name="message" type="text" ng-required="true" />
+                            <div ng-messages="addMsgForm.message.$error">
+                                <div ng-message="required">This is a required field</div>
+                            </div>
+                        </md-input-container>
+                        <small>
+                            Commands: <br />
+                            /start - Starts a new game<br />
+                            /guess {{letter}} - Makes a guess and ends your turn
+                        </small>
+                    </md-card-footer>
+                <md-card>
+
+                
                 <md-button type="submit" class="md-raised" style="display: none;">Submit</md-button>
             </form>
 
-            <md-content id="chat-window" style="height: 400px; margin-top: 25px; overflow-y: scroll;">
-                <section>
-                    <md-list>
-                      <md-subheader class="md-accent">Chat Messages</md-subheader>
-                      <md-list-item class="md-3-line" ng-repeat="msg in MainController.messages">
-                        <div class="md-list-item-text" layout="column">
-                          <h3>{{ msg.name }}</h3>
-                          <p>{{ msg.message }}</p>
-                        </div>
-                      </md-list-item>
-                    </md-list>  
-                </section>
-            </md-content>
+            
         </md-content>
     </div>
 </div>
